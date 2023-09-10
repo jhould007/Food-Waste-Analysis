@@ -414,7 +414,7 @@ be acquired from another source at a later time if necessary.</li>
 </div>
 <div id="loading-the-data" class="section level1">
 <h1>Loading the data 🔄</h1>
-<pre class="r"><code># Install and load packages
+<pre class="r"><code># Load packages
 library(tidyverse)
 library(dplyr)
 library(sqldf)
@@ -552,7 +552,8 @@ kable(head(foodWasteData), caption=&quot;foodWasteData&quot;)</code></pre>
 <p>I created a new column for combined estimate in tonnes/year, since
 this seemed important and there was no column for it in the original
 dataset.</p>
-<pre class="r"><code>foodWasteData &lt;- mutate(foodWasteData, combined_estimate_tonnes_per_year = foodWasteData$`Household estimate (tonnes/year)` + foodWasteData$`Retail estimate (tonnes/year)` + foodWasteData$`Food service estimate (tonnes/year)`)
+<pre class="r"><code># Create new column for combined estimate in tonnes/year
+foodWasteData &lt;- mutate(foodWasteData, combined_estimate_tonnes_per_year = foodWasteData$`Household estimate (tonnes/year)` + foodWasteData$`Retail estimate (tonnes/year)` + foodWasteData$`Food service estimate (tonnes/year)`)
 foodWasteData &lt;- foodWasteData[, c(1,2,13,3,4,5,6,7,8,9,10,11,12)]</code></pre>
 </div>
 <div id="renaming-the-columns" class="section level3">
@@ -571,7 +572,8 @@ it instead of deleting it so it would be there if I needed it later on.
 The links suggested the data is originally from the UN Environment
 Programme, but the links in the dataset lead to pages where the data had
 been removed for some reason.</p>
-<pre class="r"><code>dataSources &lt;- sqldf(&quot;SELECT country, m49_code, source FROM foodWasteData&quot;)
+<pre class="r"><code># Get source column out of the way
+dataSources &lt;- sqldf(&quot;SELECT country, m49_code, source FROM foodWasteData&quot;)
 foodWasteData&lt;- foodWasteData[, -13]</code></pre>
 </div>
 </div>
@@ -1156,8 +1158,7 @@ original dataset used in this project</a></li>
 Wasted Food Turns into Huge Amounts of Greenhouse Gas - Scientific
 American</a></li>
 <li><a href="https://www.worldwildlife.org/stories/fight-climate-change-by-preventing-food-waste#:~:text=But%20wasted%20food%20isn%27t,more%20potent%20than%20carbon%20dioxide.">Fight
-climate change by preventing food waste | Stories | WWF
-(worldwildlife.org)</a></li>
+climate change by preventing food waste | Stories | WWF</a></li>
 <li>My other data analysis projects:
 <ul>
 <li><a href="https://github.com/jhould007/Josh-Houlding-Bellabeat-Case-Study">Josh-Houlding-Bellabeat-Case-Study
