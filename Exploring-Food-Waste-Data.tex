@@ -1,0 +1,999 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Exploring Food Waste Data 🍏},
+  pdfauthor={Josh Houlding},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Exploring Food Waste Data 🍏}
+\author{Josh Houlding}
+\date{2023-09-10}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction 📚}\label{introduction}}
+
+\href{https://en.wikipedia.org/wiki/Food_loss_and_waste}{Food waste}, a
+pervasive global issue, refers to the disposal or wastage of edible food
+that is still fit for consumption. This phenomenon not only squanders
+precious resources but also has severe environmental, social, and
+economic implications. It is estimated that nearly one-third of all food
+produced for human consumption worldwide is lost or wasted. Such wastage
+contributes to greenhouse gas emissions, depletes natural resources, and
+exacerbates issues of food insecurity and hunger. Various factors
+contribute to this problem, including consumer behavior, inadequate
+storage, and inefficient supply chains. Understanding the complexities
+surrounding food waste is crucial for implementing effective strategies
+to mitigate its impact on both a local and global scale.
+
+\hypertarget{objective}{%
+\section{Objective 🎯}\label{objective}}
+
+The primary objective of this project is to conduct a comprehensive
+exploratory data analysis on a food waste dataset sourced from Kaggle.
+Through this analysis, we aim to uncover valuable insights, identify
+significant trends, and gain a deep understanding of the factors
+contributing to food waste. Our goals include quantifying the extent of
+food waste, examining its temporal and spatial distribution, identifying
+key drivers of food waste, and exploring potential correlations with
+various socioeconomic and environmental factors. Ultimately, this EDA
+will enable us to make data-driven recommendations for reducing food
+waste and promoting sustainable practices in the food industry.
+
+\hypertarget{the-data}{%
+\section{The data 📊}\label{the-data}}
+
+\href{https://www.kaggle.com/datasets/joebeachcapital/food-waste}{This
+dataset} contains information about food waste from every country
+worldwide. It has been collected from different sources, such as
+retailers, households, and restaurants. The data includes food waste
+totals, both per-capita and absolute numbers, as well as totals for
+household, retail and food service sources respectively. The dataset can
+be used to analyze the patterns and causes of food waste, as well as to
+propose solutions to reduce it. The dataset was created by Joe Beach
+Capital, based on various public datasets available on Kaggle and other
+platforms, and a
+\href{https://informationisbeautiful.net/visualizations/food-waste/}{visualization
+on informationisbeautiful.net} is also cited. This food waste data is
+from 2021.
+
+The dataset itself is a single CSV file containing food waste data from
+214 countries.
+
+\hypertarget{limitations}{%
+\subsubsection{Limitations}\label{limitations}}
+
+\begin{itemize}
+\tightlist
+\item
+  The data is limited to 2021, so no temporal data is available for
+  tracking trends over time.
+\item
+  The dataset does not include population data, so that will need to be
+  acquired from another source at a later time if necessary.
+\end{itemize}
+
+\hypertarget{loading-the-data}{%
+\section{Loading the data 🔄}\label{loading-the-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load packages}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(sqldf)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(knitr)}
+
+\CommentTok{\# Read the CSV file}
+\NormalTok{foodWasteData }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"foodwastedata.csv"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(foodWasteData), }\AttributeTok{caption=}\StringTok{"foodWasteData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0504}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0856}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0907}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0831}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0831}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0756}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0982}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0907}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0579}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0227}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0806}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.1814}}@{}}
+\caption{foodWasteData}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Country
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+combined figures (kg/capita/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Household estimate (kg/capita/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Household estimate (tonnes/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Retail estimate (kg/capita/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Retail estimate (tonnes/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Food service estimate (kg/capita/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Food service estimate (tonnes/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Confidence in estimate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+M49 code
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Region
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Source
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Country
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+combined figures (kg/capita/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Household estimate (kg/capita/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Household estimate (tonnes/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Retail estimate (kg/capita/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Retail estimate (tonnes/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Food service estimate (kg/capita/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Food service estimate (tonnes/year)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Confidence in estimate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+M49 code
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Region
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Source
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Afghanistan & 126 & 82 & 3109153 & 16 & 594982 & 28 & 1051783 & Very Low
+Confidence & 4 & Southern Asia &
+\url{https://www.unep.org/resources/report/unep-food-waste-index-report-2151} \\
+Albania & 127 & 83 & 238492 & 16 & 45058 & 28 & 79651 & Very Low
+Confidence & 8 & Southern Europe &
+\url{https://www.unep.org/resources/report/unep-food-waste-index-report-2160} \\
+Algeria & 135 & 91 & 3918529 & 16 & 673360 & 28 & 1190335 & Very Low
+Confidence & 12 & Northern Africa &
+\url{https://www.unep.org/resources/report/unep-food-waste-index-report-2107} \\
+Andorra & 123 & 84 & 6497 & 13 & 988 & 26 & 1971 & Low Confidence & 20 &
+Southern Europe &
+\url{https://www.unep.org/resources/report/unep-food-waste-index-report-2161} \\
+Angola & 144 & 100 & 3169523 & 16 & 497755 & 28 & 879908 & Very Low
+Confidence & 24 & Sub-Saharan Africa &
+\url{https://www.unep.org/resources/report/unep-food-waste-index-report-2176} \\
+Antigua and Barbuda & 113 & 74 & 7178 & 13 & 1244 & 26 & 2483 & Low
+Confidence & 28 & Latin America and the Caribbean &
+\url{https://www.unep.org/resources/report/unep-food-waste-index-report-2046} \\
+\end{longtable}
+
+\hypertarget{cleaning-the-data}{%
+\section{Cleaning the data 🧹}\label{cleaning-the-data}}
+
+\hypertarget{creating-a-new-column}{%
+\subsubsection{Creating a new column}\label{creating-a-new-column}}
+
+I created a new column for combined estimate in tonnes/year, since this
+seemed important and there was no column for it in the original dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create new column for combined estimate in tonnes/year}
+\NormalTok{foodWasteData }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(foodWasteData, }\AttributeTok{combined\_estimate\_tonnes\_per\_year =}\NormalTok{ foodWasteData}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Household estimate (tonnes/year)}\StringTok{\textasciigrave{}} \SpecialCharTok{+}\NormalTok{ foodWasteData}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Retail estimate (tonnes/year)}\StringTok{\textasciigrave{}} \SpecialCharTok{+}\NormalTok{ foodWasteData}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Food service estimate (tonnes/year)}\StringTok{\textasciigrave{}}\NormalTok{)}
+\NormalTok{foodWasteData }\OtherTok{\textless{}{-}}\NormalTok{ foodWasteData[, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{12}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{renaming-the-columns}{%
+\subsubsection{Renaming the columns}\label{renaming-the-columns}}
+
+I changed all column names to lowercase and put underscores in them so
+they would be easier to feed into the sqldf package for the purposes of
+running SQL queries on the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Changing column names to make them lowercase and include underscores}
+\NormalTok{new\_col\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"combined\_estimate\_kpcpy"}\NormalTok{, }\StringTok{"combined\_estimate\_tpy"}\NormalTok{, }\StringTok{"household\_estimate\_kpcpy"}\NormalTok{, }\StringTok{"household\_estimate\_tpy"}\NormalTok{, }\StringTok{"retail\_estimate\_kpcpy"}\NormalTok{, }\StringTok{"retail\_estimate\_tpy"}\NormalTok{, }\StringTok{"food\_service\_estimate\_kpcpy"}\NormalTok{, }\StringTok{"food\_service\_estimate\_tpy"}\NormalTok{, }\StringTok{"estimate\_confidence"}\NormalTok{, }\StringTok{"m49\_code"}\NormalTok{, }\StringTok{"region"}\NormalTok{, }\StringTok{"source"}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(foodWasteData) }\OtherTok{\textless{}{-}}\NormalTok{ new\_col\_names}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{moving-the-source-column-to-reduce-clutter}{%
+\subsubsection{Moving the source column to reduce
+clutter}\label{moving-the-source-column-to-reduce-clutter}}
+
+I didn't need the source column for my analysis, so I decided to move it
+instead of deleting it so it would be there if I needed it later on. The
+links suggested the data is originally from the UN Environment
+Programme, but the links in the dataset lead to pages where the data had
+been removed for some reason.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Get source column out of the way}
+\NormalTok{dataSources }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT country, m49\_code, source FROM foodWasteData"}\NormalTok{)}
+\NormalTok{foodWasteData}\OtherTok{\textless{}{-}}\NormalTok{ foodWasteData[, }\SpecialCharTok{{-}}\DecValTok{13}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{analyzing-the-data}{%
+\section{Analyzing the data 🔬}\label{analyzing-the-data}}
+
+\hypertarget{how-much-food-is-wasted-every-year-in-total}{%
+\subsubsection{How much food is wasted every year in
+total?}\label{how-much-food-is-wasted-every-year-in-total}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find total global food waste every year}
+\NormalTok{total\_foodwaste }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT SUM(combined\_estimate\_tpy) FROM foodWasteData"}\NormalTok{)[[}\DecValTok{1}\NormalTok{]]}
+\FunctionTok{print}\NormalTok{(total\_foodwaste)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 930857271
+\end{verbatim}
+
+In total, a staggering 930,857,271 tonnes of food is wasted every year.
+This is nearly a billion tonnes \emph{every single year}.
+
+According to
+\href{https://www.healthline.com/health/mens-health/average-weight-for-men}{Healthline},
+the average adult weighs 136.7 pounds, or 62 kg.
+
+Thus, our total annual food waste is equivalent to:
+
+\begin{itemize}
+\item ~
+  \hypertarget{billion-human-adults.}{%
+  \subparagraph{\texorpdfstring{\textbf{15,014,000,000 (\textgreater15
+  billion) human
+  adults.}}{15,014,000,000 (\textgreater15 billion) human adults.}}\label{billion-human-adults.}}
+\item ~
+  \hypertarget{million-2021-toyota-corollas.}{%
+  \subparagraph{\texorpdfstring{\textbf{677,480,000 (\textgreater677
+  million) 2021 Toyota
+  Corollas.}}{677,480,000 (\textgreater677 million) 2021 Toyota Corollas.}}\label{million-2021-toyota-corollas.}}
+\item ~
+  \hypertarget{million-african-elephants.}{%
+  \subparagraph{\texorpdfstring{\textbf{209,420,000 (\textgreater209
+  million) African
+  elephants.}}{209,420,000 (\textgreater209 million) African elephants.}}\label{million-african-elephants.}}
+\item ~
+  \hypertarget{american-nimitz-class-aircraft-carriers.}{%
+  \subparagraph{\texorpdfstring{\textbf{9,402.6 American Nimitz-class
+  aircraft
+  carriers.}}{9,402.6 American Nimitz-class aircraft carriers.}}\label{american-nimitz-class-aircraft-carriers.}}
+\end{itemize}
+
+Truly staggering numbers in perspective.
+
+\hypertarget{which-countries-have-the-highest-and-lowest-combined-per-capita-food-waste}{%
+\subsubsection{Which countries have the highest and lowest combined
+per-capita food
+waste?}\label{which-countries-have-the-highest-and-lowest-combined-per-capita-food-waste}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find the country with the highest combined per{-}capita food waste}
+\NormalTok{highestFoodWasteKpcpy }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT country, MAX(combined\_estimate\_kpcpy), estimate\_confidence FROM foodWasteData"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(highestFoodWasteKpcpy), }\AttributeTok{align=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+country & MAX(combined\_estimate\_kpcpy) & estimate\_confidence \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Malaysia & 260 & Medium Confidence \\
+\end{longtable}
+
+Malaysia has the highest combined per-capita food waste rate in the
+world at 260 kg/capita/year.
+
+\href{https://www.npr.org/sections/thesalt/2011/12/31/144478009/the-average-american-ate-literally-a-ton-this-year}{According
+to NPR}, the average American eats 1,996 lbs (905.4 kg) of food per
+year. Assuming that is 3 meals per day and people in every country eat
+about the same amount annually, we end up with an estimate of 0.827
+kg/meal.
+
+Thus, the average Malaysian wastes a massive 314 meals' worth of food
+every year.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find the country with the lowest combined per{-}capita food waste}
+\NormalTok{lowestFoodWasteKpcpy }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT country, MIN(combined\_estimate\_kpcpy), estimate\_confidence FROM foodWasteData"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(lowestFoodWasteKpcpy), }\AttributeTok{align=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+country & MIN(combined\_estimate\_kpcpy) & estimate\_confidence \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Slovenia & 61 & Medium Confidence \\
+\end{longtable}
+
+At the other end of the spectrum, Slovenia has the lowest combined
+per-capita food waste of all countries, with its citizens wasting around
+74 meals a year.
+
+\hypertarget{what-are-the-top-10-and-bottom-10-countries-for-combined-per-capita-food-waste}{%
+\subsubsection{What are the top 10 and bottom 10 countries for combined
+per-capita food
+waste?}\label{what-are-the-top-10-and-bottom-10-countries-for-combined-per-capita-food-waste}}
+
+First, we aggregate the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Subset the dataframe to select the top 10 countries with the highest and lowest combined per{-}capita food waste}
+\NormalTok{topCountries }\OtherTok{\textless{}{-}} \FunctionTok{tail}\NormalTok{(foodWasteData[}\FunctionTok{order}\NormalTok{(foodWasteData}\SpecialCharTok{$}\NormalTok{combined\_estimate\_kpcpy), ], }\DecValTok{10}\NormalTok{)}
+\NormalTok{bottomCountries }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(foodWasteData[}\FunctionTok{order}\NormalTok{(foodWasteData}\SpecialCharTok{$}\NormalTok{combined\_estimate\_kpcpy), ], }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then display it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Show the 10 countries with the highest combined per{-}capita food waste}
+\FunctionTok{ggplot}\NormalTok{(topCountries, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(country, }\SpecialCharTok{{-}}\NormalTok{combined\_estimate\_kpcpy), }\AttributeTok{y =}\NormalTok{ combined\_estimate\_kpcpy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"red"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ combined\_estimate\_kpcpy), }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.3}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Add labels}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"The 10 Countries with Highest Combined Per{-}Capita Food Waste"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Per{-}Capita Food Waste (kg/year)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"} \OtherTok{=} \StringTok{"Combined"}\NormalTok{),}
+    \AttributeTok{name =} \StringTok{"Waste Type"}\NormalTok{,}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Combined"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{)  }\CommentTok{\# Hide the legend}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Exploring-Food-Waste-Data_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+We can see that the top 10 countries are largely located in Africa and
+the Middle East, areas with lower levels of socioeconomic development.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Show the 10 countries with the lowest combined per{-}capita food waste}
+\FunctionTok{ggplot}\NormalTok{(bottomCountries, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(country, }\SpecialCharTok{{-}}\NormalTok{combined\_estimate\_kpcpy), }\AttributeTok{y =}\NormalTok{ combined\_estimate\_kpcpy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"\#277a36"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ combined\_estimate\_kpcpy), }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.3}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Add labels}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"The 10 Countries with Lowest Combined Per{-}Capita Food Waste"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Per{-}Capita Food Waste (kg/year)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"} \OtherTok{=} \StringTok{"Combined"}\NormalTok{),}
+    \AttributeTok{name =} \StringTok{"Waste Type"}\NormalTok{,}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Combined"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{)  }\CommentTok{\# Hide the legend}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Exploring-Food-Waste-Data_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+As expected, most of the countries with the lowest food waste per capita
+are in Europe, a highly-developed region of the world.
+
+\hypertarget{which-countries-generate-the-most-and-least-combined-total-food-waste}{%
+\subsubsection{Which countries generate the most and least combined
+total food
+waste?}\label{which-countries-generate-the-most-and-least-combined-total-food-waste}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find the country with the highest combined total food waste}
+\NormalTok{highestFoodWaste }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT country, MAX(combined\_estimate\_tpy), estimate\_confidence FROM foodWasteData"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(highestFoodWaste), }\AttributeTok{align=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+country & MAX(combined\_estimate\_tpy) & estimate\_confidence \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+China & 179448659 & Very Low Confidence \\
+\end{longtable}
+
+The country with the highest combined total food waste estimate is
+China, at over 179 million tonnes. However, this estimate could be
+inaccurate as very low confidence is given.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find the country with the lowest combined total food waste}
+\NormalTok{lowestFoodWaste }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT country, MIN(combined\_estimate\_tpy), estimate\_confidence FROM foodWasteData"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(lowestFoodWaste), }\AttributeTok{align=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+country & MIN(combined\_estimate\_tpy) & estimate\_confidence \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Nauru & 1264 & Low Confidence \\
+\end{longtable}
+
+Nauru is a small Micronesian island with a tiny population of 12,511 as
+of 2021, so it is expected that they would have a miniscule total amount
+of food waste.
+
+\hypertarget{what-is-the-average-combined-per-capita-food-waste-across-all-countries}{%
+\subsubsection{What is the average combined per-capita food waste across
+all
+countries?}\label{what-is-the-average-combined-per-capita-food-waste-across-all-countries}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find the average combined per{-}capita food waste across all countries}
+\NormalTok{avg\_foodwaste\_kpcpy }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT AVG(combined\_estimate\_kpcpy) FROM foodWasteData"}\NormalTok{)[[}\DecValTok{1}\NormalTok{]]}
+\FunctionTok{print}\NormalTok{(avg\_foodwaste\_kpcpy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 126.7944
+\end{verbatim}
+
+The average person on Earth wastes about 126.8 kg of food every year,
+which is about 153 meals' worth given our estimate of 0.827 kg/meal
+earlier.
+
+\hypertarget{how-does-average-per-capita-food-waste-vary-across-regions}{%
+\subsubsection{How does average per-capita food waste vary across
+regions?}\label{how-does-average-per-capita-food-waste-vary-across-regions}}
+
+I wanted to explore the variation in per-capita food waste across
+regions, and not just individual countries.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Display all regions in the dataset}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{unique}\NormalTok{(foodWasteData}\SpecialCharTok{$}\NormalTok{region))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Southern Asia"                   "Southern Europe"                
+##  [3] "Northern Africa"                 "Sub-Saharan Africa"             
+##  [5] "Latin America and the Caribbean" "Western Asia"                   
+##  [7] "Australia and New Zealand"       "Western Europe"                 
+##  [9] "Eastern Europe"                  "Northern America"               
+## [11] "South-eastern Asia"              "Eastern Asia"                   
+## [13] "Northern Europe"                 "Melanesia"                      
+## [15] "Polynesia"                       "Micronesia"                     
+## [17] "Central Asia"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Group the data by the \textquotesingle{}region\textquotesingle{} column}
+\NormalTok{foodWasteData }\OtherTok{\textless{}{-}}\NormalTok{ foodWasteData }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(region)}
+\CommentTok{\# Calculate averages for each per{-}capita food waste column}
+\NormalTok{averageFoodWasteByRegion }\OtherTok{\textless{}{-}}\NormalTok{ foodWasteData }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{avg\_combined\_kpcpy =} \FunctionTok{mean}\NormalTok{(combined\_estimate\_kpcpy, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{avg\_household\_kpcpy =} \FunctionTok{mean}\NormalTok{(household\_estimate\_kpcpy, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{avg\_retail\_kpcpy =} \FunctionTok{mean}\NormalTok{(retail\_estimate\_kpcpy, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{avg\_food\_service\_kpcpy =} \FunctionTok{mean}\NormalTok{(food\_service\_estimate\_kpcpy, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    )}
+\CommentTok{\# Order the data by combined averages}
+\NormalTok{averageFoodWasteByRegion }\OtherTok{\textless{}{-}}\NormalTok{ averageFoodWasteByRegion[}\FunctionTok{order}\NormalTok{(averageFoodWasteByRegion}\SpecialCharTok{$}\NormalTok{avg\_combined\_kpcpy, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{), ]}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(averageFoodWasteByRegion, }\DecValTok{17}\NormalTok{), }\AttributeTok{align=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2883}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1712}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1802}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1532}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2072}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+region
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+avg\_combined\_kpcpy
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+avg\_household\_kpcpy
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+avg\_retail\_kpcpy
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+avg\_food\_service\_kpcpy
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Sub-Saharan Africa & 145.3958 & 101.64583 & 15.77083 & 27.97917 \\
+Western Asia & 145.3889 & 101.05556 & 17.16667 & 27.16667 \\
+South-eastern Asia & 137.4545 & 83.00000 & 21.18182 & 33.27273 \\
+Northern Africa & 133.5000 & 89.50000 & 16.00000 & 28.00000 \\
+Central Asia & 130.2000 & 86.20000 & 16.00000 & 28.00000 \\
+Melanesia & 128.6000 & 85.60000 & 15.40000 & 27.60000 \\
+Micronesia & 123.1429 & 82.00000 & 14.28571 & 26.85714 \\
+Southern Europe & 123.0000 & 85.60000 & 12.60000 & 24.80000 \\
+Northern America & 120.7500 & 71.50000 & 13.75000 & 35.50000 \\
+Polynesia & 119.5000 & 76.75000 & 15.25000 & 27.50000 \\
+Latin America and the Caribbean & 115.5476 & 73.57143 & 14.78571 &
+27.19048 \\
+Southern Asia & 113.1111 & 71.88889 & 16.00000 & 25.22222 \\
+Eastern Asia & 113.0000 & 71.42857 & 13.71429 & 27.85714 \\
+Northern Europe & 111.6667 & 74.66667 & 12.83333 & 24.16667 \\
+Australia and New Zealand & 111.5000 & 81.50000 & 6.00000 & 24.00000 \\
+Eastern Europe & 109.4000 & 68.10000 & 14.30000 & 27.00000 \\
+Western Europe & 104.8889 & 67.11111 & 12.00000 & 25.77778 \\
+\end{longtable}
+
+The three regions with the highest per-capita food waste are Sub-Saharan
+Africa, Western Asia and South-eastern Asia, at 145.4 kg/person/year for
+the former two and 137.5 kg/person/year for the latter. On the other
+hand, Western Europe is a very wealthy region and has the lowest
+per-capita food waste, at 104.9 kg/person/year. Northern America is near
+the middle of the pack, at 9th out of 17 regions. This was surprising,
+as I predicted that more economically-developed regions of the world
+would waste more. I was curious about this and wanted to learn more.
+
+According to the
+\href{https://www.wri.org/insights/reducing-food-loss-and-food-waste\#:~:text=There\%20used\%20to\%20be\%20a,shown\%20this\%20isn\%27t\%20true.}{World
+Resources Institute}, poor infrastructure (unreliable roads, lack of
+cold storage, old equipment), suboptimal packaging, poor food
+management, and consumer behaviors are the most impactful factors on
+food waste. Less-developed regions like Sub-Saharan Africa may lack
+dependable roads and high-tech farming equipment that enable food to get
+from farm to table before going bad, as well as proper cold storage and
+packaging to keep food edible. Consumers in these regions may also be
+unaware of efficient food preparation and storage techniques, leading to
+tonnes of unnecessary waste.
+
+Additional fun fact: ``The environmental impact of wasted food is
+greater than that of packaging waste. So, while it's important to limit
+this waste, it's also important to use correct packaging to reduce food
+spoilage'' (Goodwin, 2023). In other words, using more packaging to make
+sure food doesn't go off is a worthwhile investment from an
+environmental perspective.
+
+\hypertarget{how-does-household-per-capita-food-waste-compare-to-retail-and-food-service-per-capita-food-waste}{%
+\subsubsection{How does household per-capita food waste compare to
+retail and food service per-capita food
+waste?}\label{how-does-household-per-capita-food-waste-compare-to-retail-and-food-service-per-capita-food-waste}}
+
+Let's take a look at the data from above in a graph.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Show how different categories of per{-}capita food waste compare in each region}
+\FunctionTok{ggplot}\NormalTok{(averageFoodWasteByRegion, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(region, avg\_combined\_kpcpy), }\AttributeTok{y =}\NormalTok{ avg\_combined\_kpcpy, }\AttributeTok{fill =} \StringTok{"Combined"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ avg\_household\_kpcpy, }\AttributeTok{fill =} \StringTok{"Household"}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ avg\_retail\_kpcpy, }\AttributeTok{fill =} \StringTok{"Retail"}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ avg\_food\_service\_kpcpy, }\AttributeTok{fill =} \StringTok{"Food Service"}\NormalTok{), }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Relative Proportions of Food Waste Types by Region"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Region"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Average Per{-}Capita Food Waste (kg/year)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{0}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Household"} \OtherTok{=} \StringTok{"green"}\NormalTok{, }\StringTok{"Retail"} \OtherTok{=} \StringTok{"blue"}\NormalTok{, }\StringTok{"Food Service"} \OtherTok{=} \StringTok{"orange"}\NormalTok{),}
+    \AttributeTok{name =} \StringTok{"Food Waste Types"}\NormalTok{,}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Retail"}\NormalTok{, }\StringTok{"Household"}\NormalTok{, }\StringTok{"Food Service"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title =} \StringTok{"Food Waste Types"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()  }\CommentTok{\# Flip the x and y axes for horizontal bars}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Exploring-Food-Waste-Data_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+Clearly, the biggest contributor to food waste is households for every
+region, and the disparity between household food waste and the other two
+sources is especially striking in less-developed regions like
+Sub-Saharan Africa and Western Asia. More developed regions like Eastern
+and Western Europe have a more uniform distribution of food waste
+contributions from all 3 sources.
+
+\hypertarget{which-source-contributes-the-most-to-total-food-waste}{%
+\subsubsection{Which source contributes the most to total food
+waste?}\label{which-source-contributes-the-most-to-total-food-waste}}
+
+Knowing the proportions of food waste from household, retail and food
+service in every region, I wanted to see how the totals compared.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compare food waste output of households, retail and food service}
+\NormalTok{totalFoodWaste }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT SUM(household\_estimate\_tpy) AS total\_household, SUM(retail\_estimate\_tpy) AS total\_retail, SUM(food\_service\_estimate\_tpy) AS total\_food\_service FROM foodWasteData"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(totalFoodWaste), }\AttributeTok{align=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+total\_household & total\_retail & total\_food\_service \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+569003670 & 118137722 & 243715879 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Visualize total food waste broken down by source}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\StringTok{"Household"}\NormalTok{, }\StringTok{"Retail"}\NormalTok{, }\StringTok{"Food Service"}\NormalTok{), }
+        \AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]), }
+              \FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]), }
+              \FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{])), }
+        \AttributeTok{fill =} \FunctionTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"blue"}\NormalTok{)),}
+    \AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }
+    \AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }
+    \AttributeTok{width =} \FloatTok{0.7}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\StringTok{"Household"}\NormalTok{, }\StringTok{"Retail"}\NormalTok{, }\StringTok{"Food Service"}\NormalTok{), }
+        \AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]), }
+              \FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]), }
+              \FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{])), }
+        \AttributeTok{label =}\NormalTok{ scales}\SpecialCharTok{::}\FunctionTok{comma}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]), }
+                                \FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]), }
+                                \FunctionTok{as.numeric}\NormalTok{(totalFoodWaste[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{])))),}
+    \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{),}
+    \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Total Food Waste by Source"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Source"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Total Food Waste (kg)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"orange"} \OtherTok{=} \StringTok{"orange"}\NormalTok{, }\StringTok{"green"} \OtherTok{=} \StringTok{"green"}\NormalTok{, }\StringTok{"blue"} \OtherTok{=} \StringTok{"blue"}\NormalTok{),}
+    \AttributeTok{name =} \StringTok{"Food Waste Types"}\NormalTok{,}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{),}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Retail"}\NormalTok{, }\StringTok{"Household"}\NormalTok{, }\StringTok{"Food Service"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Exploring-Food-Waste-Data_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+Household food waste far surpasses that of food service and retail put
+together. This could be happening for a variety of reasons. Consumers
+could be accidentally purchasing too much food because of bulk buying,
+lack of meal planning or impulse buying, and throwing a lot of it out.
+They could also be unaware of the severe environmental and economic
+consequences of food waste, leading to wasteful behavior. As previously
+mentioned, many people in developing regions may not have access to
+refrigerators or other effective food storage units, leading to food
+going bad before it can be used. In some cultures, having an abundance
+of food is seen as a sign of hospitality or generosity, which can lead
+to more waste.
+
+On the retail and food service side, many retailers around the world may
+reject imperfect produce or packaged food and throw it out instead of
+donating it. Food service establishments may have similar practices,
+such as pizza shops throwing out display slices at the end of the day
+instead of keeping or donating them.
+
+\hypertarget{is-there-a-relationship-between-a-countrys-population-size-and-its-total-food-waste}{%
+\subsubsection{Is there a relationship between a country's population
+size and its total food
+waste?}\label{is-there-a-relationship-between-a-countrys-population-size-and-its-total-food-waste}}
+
+Answering this question required finding a dataset with population
+numbers for each country. However, joining it directly to the food waste
+dataset would be difficult because every dataset I found only had
+ISO-alpha3 3-letter country codes, and \texttt{foodWasteData}only had
+M49 country codes. I then had the idea of joining \texttt{foodWasteData}
+with a country code dataset containing both M49 codes \emph{and}
+ISO-alpha3 codes by M49 codes, then joining the updated
+\texttt{foodWasteData} with a new population dataset by ISO-alpha3
+codes. I found the following two datasets on Kaggle to accomplish this
+task:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.kaggle.com/datasets/najielkotob/standard-country-or-area-codes-m49}{Standard
+  country or area codes (M49) \textbar{} Kaggle}
+\item
+  \href{https://www.kaggle.com/datasets/rsrishav/world-population}{2021
+  World Population (updated daily) \textbar{} Kaggle}
+\end{itemize}
+
+First, we join the datasets:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load dataset linking M49 codes to ISO{-}alpha3 codes and join with foodWasteData}
+\NormalTok{codesData }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"M49 and ISO{-}alpha3 codes.csv"}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(codesData)[}\FunctionTok{names}\NormalTok{(codesData) }\SpecialCharTok{==} \StringTok{\textquotesingle{}M49 code\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}m49\_code\textquotesingle{}}
+\FunctionTok{names}\NormalTok{(codesData)[}\FunctionTok{names}\NormalTok{(codesData) }\SpecialCharTok{==} \StringTok{\textquotesingle{}ISO{-}alpha3 code\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}iso\_alpha3\_code\textquotesingle{}}
+\NormalTok{codesData }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT m49\_code, iso\_alpha3\_code FROM codesData"}\NormalTok{)}
+\NormalTok{foodWasteData }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT * FROM foodWasteData INNER JOIN codesData }
+\StringTok{                 ON foodWasteData.m49\_code = codesData.m49\_code"}\NormalTok{)}
+
+\CommentTok{\# Join population dataset with foodWasteData using ISO{-}alpha3 codes}
+\NormalTok{populationData }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"2021\_population.csv"}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(populationData)[}\FunctionTok{names}\NormalTok{(populationData) }\SpecialCharTok{==} \StringTok{\textquotesingle{}iso\_code\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}iso\_alpha3\_code\textquotesingle{}}
+\FunctionTok{names}\NormalTok{(populationData)[}\FunctionTok{names}\NormalTok{(populationData) }\SpecialCharTok{==} \StringTok{\textquotesingle{}2021\_last\_updated\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}population\_2021\textquotesingle{}}
+\NormalTok{populationData }\OtherTok{\textless{}{-}} \FunctionTok{sqldf}\NormalTok{(}\StringTok{"SELECT iso\_alpha3\_code, population\_2021 FROM populationData"}\NormalTok{)}
+\NormalTok{foodWasteData }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(foodWasteData, populationData, }\AttributeTok{by =} \StringTok{"iso\_alpha3\_code"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# Reorder foodWasteData and remove unnecessary duplicate m49 column}
+\NormalTok{foodWasteData }\OtherTok{\textless{}{-}}\NormalTok{ foodWasteData[, }\SpecialCharTok{{-}}\DecValTok{14}\NormalTok{]}
+\NormalTok{foodWasteData }\OtherTok{\textless{}{-}}\NormalTok{ foodWasteData[, }\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{14}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+Then, we look for a correlation between population and total food waste.
+My prediction was that population and total food waste would be strongly
+correlated.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Look for correlation between population size and total food waste}
+\CommentTok{\# Create the scatterplot with a regression line}
+\FunctionTok{ggplot}\NormalTok{(foodWasteData, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ population\_2021, }\AttributeTok{y =}\NormalTok{ combined\_estimate\_tpy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Add regression line}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Population vs. Total Food Waste"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Population (2021)"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Combined Food Waste Estimate (tonnes/year)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Exploring-Food-Waste-Data_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate the regression coefficient r\^{}2}
+\NormalTok{foodwaste\_regression }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(population\_2021 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ combined\_estimate\_tpy, }\AttributeTok{data =}\NormalTok{ foodWasteData)}
+\NormalTok{r\_squared }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(foodwaste\_regression)}\SpecialCharTok{$}\NormalTok{r.squared   }
+\FunctionTok{print}\NormalTok{(r\_squared)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9660028
+\end{verbatim}
+
+The regression coefficient r\^{}2 is \textasciitilde0.966, meaning that
+96.6\% of variation in a country's total combined food waste can be
+explained by its population. This is exactly what I expected to find.
+
+\hypertarget{conclusion}{%
+\section{Conclusion 👏}\label{conclusion}}
+
+\hypertarget{recommendations}{%
+\subsubsection{Recommendations}\label{recommendations}}
+
+\begin{itemize}
+\tightlist
+\item
+  Countries should improve education efforts around meal planning, the
+  consequences of food waste, and proper storage of food.
+\item
+  Incentives should be given to encourage people to only buy what they
+  need or donate what they don't.
+\item
+  Less-developed countries should implement policies to improve access
+  to refrigerators and other storage units that can keep food from going
+  bad too quickly.
+\item
+  Retail and food service businesses should set up procedures to donate
+  imperfect or extra food items to those in need instead of condemning
+  it to the trash pile immediately. To incentivize this, governments
+  could provide tax breaks for businesses that donate significant
+  amounts of extra food that would have otherwise gone to waste.
+\end{itemize}
+
+\hypertarget{to-check-out-next}{%
+\subsubsection{To check out next}\label{to-check-out-next}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.kaggle.com/datasets/joebeachcapital/food-waste}{The
+  original dataset used in this project}
+\item
+  \href{https://www.scientificamerican.com/article/how-wasted-food-turns-into-huge-amounts-of-greenhouse-gas/}{How
+  Wasted Food Turns into Huge Amounts of Greenhouse Gas - Scientific
+  American}
+\item
+  \href{https://www.worldwildlife.org/stories/fight-climate-change-by-preventing-food-waste\#:~:text=But\%20wasted\%20food\%20isn\%27t,more\%20potent\%20than\%20carbon\%20dioxide.}{Fight
+  climate change by preventing food waste \textbar{} Stories \textbar{}
+  WWF}
+\item
+  My other data analysis projects:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://github.com/jhould007/Josh-Houlding-Bellabeat-Case-Study}{Josh-Houlding-Bellabeat-Case-Study
+    (GitHub)}
+  \item
+    \href{https://github.com/jhould007/Seattle-Rain-Analysis}{Seattle-Rain-Analysis
+    (GitHub)}
+  \end{itemize}
+\item
+  \href{https://github.com/jhould007}{My entire GitHub profile}
+\item
+  \href{https://www.kaggle.com/joshhoulding}{My Kaggle profile}
+\item
+  \href{https://www.linkedin.com/in/joshuahoulding/}{My LinkedIn
+  profile}
+\end{itemize}
+
+\hypertarget{thank-you-for-reading-and-have-a-good-one}{%
+\subsection{\texorpdfstring{\textbf{Thank you for reading, and have a
+good one!}
+😃}{Thank you for reading, and have a good one! 😃}}\label{thank-you-for-reading-and-have-a-good-one}}
+
+\end{document}

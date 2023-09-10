@@ -424,7 +424,20 @@ library(knitr)
 
 # Read the CSV file
 foodWasteData &lt;- read_csv(&quot;foodwastedata.csv&quot;)
-kable(head(foodWasteData), caption=&quot;foodWasteData&quot;)</code></pre>
+colnames(foodWasteData)</code></pre>
+<pre><code>##  [1] &quot;Country&quot;                               
+##  [2] &quot;combined figures (kg/capita/year)&quot;     
+##  [3] &quot;Household estimate (kg/capita/year)&quot;   
+##  [4] &quot;Household estimate (tonnes/year)&quot;      
+##  [5] &quot;Retail estimate (kg/capita/year)&quot;      
+##  [6] &quot;Retail estimate (tonnes/year)&quot;         
+##  [7] &quot;Food service estimate (kg/capita/year)&quot;
+##  [8] &quot;Food service estimate (tonnes/year)&quot;   
+##  [9] &quot;Confidence in estimate&quot;                
+## [10] &quot;M49 code&quot;                              
+## [11] &quot;Region&quot;                                
+## [12] &quot;Source&quot;</code></pre>
+<pre class="r"><code>kable(head(foodWasteData), caption=&quot;foodWasteData&quot;)</code></pre>
 <table>
 <caption>foodWasteData</caption>
 <colgroup>

@@ -1,8 +1,10 @@
 ---
-title: "Exploring Food Waste Data 🍏"
+title: "Exploring Food Waste Data \U0001F34F"
 author: "Josh Houlding"
 date: "2023-09-10"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -41,6 +43,7 @@ library(knitr)
 
 # Read the CSV file
 foodWasteData <- read_csv("foodwastedata.csv")
+colnames(foodWasteData)
 kable(head(foodWasteData), caption="foodWasteData")
 ```
 
