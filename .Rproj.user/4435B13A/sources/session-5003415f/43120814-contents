@@ -1,0 +1,114 @@
+---
+title: "Exploring Food Waste Data"
+author: "Josh Houlding"
+date: "2023-09-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+Food waste, a pervasive global issue, refers to the disposal or wastage of edible food that is still fit for consumption. This phenomenon not only squanders precious resources but also has severe environmental, social, and economic implications. It is estimated that nearly one-third of all food produced for human consumption worldwide is lost or wasted. Such wastage contributes to greenhouse gas emissions, depletes natural resources, and exacerbates issues of food insecurity and hunger. Various factors contribute to this problem, including consumer behavior, inadequate storage, and inefficient supply chains. Understanding the complexities surrounding food waste is crucial for implementing effective strategies to mitigate its impact on both a local and global scale.
+
+# Objective
+The primary objective of this project is to conduct a comprehensive exploratory data analysis on a food waste dataset sourced from Kaggle. Through this analysis, we aim to uncover valuable insights, identify significant trends, and gain a deep understanding of the factors contributing to food waste. Our goals include quantifying the extent of food waste, examining its temporal and spatial distribution, identifying key drivers of food waste, and exploring potential correlations with various socioeconomic and environmental factors. Ultimately, this EDA will enable us to make data-driven recommendations for reducing food waste and promoting sustainable practices in the food industry.
+
+# The data
+[This dataset](https://www.kaggle.com/datasets/joebeachcapital/food-waste) contains information about food waste from every country worldwide. It has been collected from different sources, such as retailers, households, and restaurants. The data includes food waste totals, both per-capita and absolute numbers, as well as totals for household, retail and food service sources respectively. The dataset can be used to analyze the patterns and causes of food waste, as well as to propose solutions to reduce it. The dataset was created by Joe Beach Capital, based on various public datasets available on Kaggle and other platforms, and a [visualization on informationisbeautiful.net](https://informationisbeautiful.net/visualizations/food-waste/) is also cited. This food waste data is from 2021. 
+
+The dataset itself is a single CSV file containing food waste data from 214 countries.
+
+### Limitations
+* The data is limited to 2021, so no temporal data is available for tracking trends over time. 
+* The dataset does not include population data, so that will need to be acquired from another source at a later time if necessary. 
+
+# Loading the data
+```{r, message=FALSE}
+# Install and load packages
+library(tidyverse)
+library(dplyr)
+library(sqldf)
+library(ggplot2)
+library(readr)
+library(knitr)
+
+# Read the CSV file
+foodWasteData <- read_csv("foodwastedata.csv")
+kable(head(foodWasteData), caption="foodWasteData")
+```
+
+# Cleaning the data
+
+### Creating a new column
+I created a new column for combined estimate in tonnes/year, since this seemed important and there was no column for it in the original dataset. 
+```{r}
+foodWasteData <- mutate(foodWasteData, combined_estimate_tonnes_per_year = foodWasteData$`Household estimate (tonnes/year)` + foodWasteData$`Retail estimate (tonnes/year)` + foodWasteData$`Food service estimate (tonnes/year)`)
+foodWasteData <- foodWasteData[, c(1,2,13,3,4,5,6,7,8,9,10,11,12)]
+```
+
+### Renaming the columns
+I changed all column names to lowercase and put underscores in them so they would be easier to feed into the sqldf package for the purposes of running SQL queries on the data. 
+
+```{r}
+# Changing column names to make them lowercase and include underscores
+new_col_names <- c("country", "combined_estimate_kpcpy", "combined_estimate_tpy", "household_estimate_kpcpy", "household_estimate_tpy", "retail_estimate_kpcpy", "retail_estimate_tpy", "food_service_estimate_kpcpy", "food_service_estimate_tpy", "estimate_confidence", "m49_code", "region", "source")
+names(foodWasteData) <- new_col_names
+```
+
+### Moving the source column to reduce clutter
+I didn't need the source column for my analysis, so I decided to move it instead of deleting it so it would be there if I needed it later on. The links suggested the data is originally from the UN Environment Programme, but the links in the dataset lead to pages where the data had been removed for some reason. 
+
+```{r}
+dataSources <- sqldf("SELECT country, m49_code, source FROM foodWasteData")
+foodWasteData<- foodWasteData[, -13]
+```
+
+# Analyzing the data
+
+### How much food is wasted every year in total? 
+```{r}
+# Find total global food waste every year
+total_foodwaste <- sqldf("SELECT SUM(combined_estimate_tpy) FROM foodWasteData")[[1]]
+print(total_foodwaste)
+```
+
+In total, a staggering 930,857,271 tonnes of food is wasted every year. This is nearly a billion tonnes *every single year*. 
+
+According to [Healthline](https://www.healthline.com/health/mens-health/average-weight-for-men), the average adult weighs 136.7 pounds, or 62 kg. 
+
+Thus, our total annual food waste is equivalent to:
+
+* **15,014,000,000 (>15 billion) human adults.**
+* **677,480,000 (>677 million) 2021 Toyota Corollas.**
+* **209,420,000 (>209 million) African elephants.**
+* **9,402.6 American Nimitz-class aircraft carriers.**
+
+Truly staggering numbers in perspective. 
+
+### Which countries have the highest and lowest combined per-capita food waste? 
+```{r}
+# Find the country with the highest combined per-capita food waste
+highestFoodWasteKpcpy <- sqldf("SELECT country, MAX(combined_estimate_kpcpy) FROM foodWasteData")
+kable(head(highestFoodWasteKpcpy), align="l")
+```
+
+Malaysia has the highest combined per-capita food waste rate in the world at 260 kg/capita/year.  
+
+[According to NPR](https://www.npr.org/sections/thesalt/2011/12/31/144478009/the-average-american-ate-literally-a-ton-this-year), the average American eats 1,996 lbs (905.4 kg) of food per year. Assuming that is 3 meals per day and people in every country eat about the same amount annually, we end up with an estimate of 0.827 kg/meal. 
+
+Thus, the average Malaysian wastes a massive 314 meals' worth of food every year. 
+
+```{r}
+# Find the country with the lowest combined per-capita food waste
+lowestFoodWasteKpcpy <- sqldf("SELECT country, MIN(combined_estimate_kpcpy) FROM foodWasteData")
+kable(head(lowestFoodWasteKpcpy), align="l")
+```
+
+At the other end of the spectrum, Slovenia has the lowest combined per-capita food waste of all countries, with its citizens wasting around 74 meals a year. 
+
+### Which countries generate the most and least combined food waste? 
+
+
+
